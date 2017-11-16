@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SampleMvc.Models;
+using SampleMvc.Db.Models;
 
-namespace SampleMvc.Data
+namespace SampleMvc.Db
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

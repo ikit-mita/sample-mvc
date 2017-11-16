@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SampleMvc.Data;
-using SampleMvc.Models;
 using SampleMvc.Services;
+using SampleMvc.Db;
+using SampleMvc.Db.Models;
 
 namespace SampleMvc
 {

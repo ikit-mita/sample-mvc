@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using SampleMvc.Models;
+using SampleMvc.Db.Models;
 using SampleMvc.Models.ManageViewModels;
 using SampleMvc.Services;
 
