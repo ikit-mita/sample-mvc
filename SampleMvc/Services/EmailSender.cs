@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 
 namespace SampleMvc.Services
 {
@@ -6,9 +8,22 @@ namespace SampleMvc.Services
     // For more details see https://go.microsoft.com/fwlink/?LinkID=532713
     public class EmailSender : IEmailSender
     {
-        public Task SendEmailAsync(string email, string subject, string message)
+        public async Task SendEmailAsync(string email, string subject, string message)
         {
-            return Task.CompletedTask;
+            var client = new SmtpClient("smtp.gmail.com", 587)
+            {
+                EnableSsl = true,
+                UseDefaultCredentials = false,
+                Credentials =
+                new NetworkCredential("sample.mvc.2017@gmail.com", "4rfv$RFV")
+            };
+
+            var msg = new MailMessage("sample.mvc.2017@gmail.com",
+                email,
+                subject,
+                message);
+
+            await client.SendMailAsync(msg);
         }
     }
 }
