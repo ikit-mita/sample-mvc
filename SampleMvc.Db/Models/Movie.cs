@@ -20,5 +20,7 @@ namespace SampleMvc.Db.Models
         [MaxLength(256)]
         public string Genre { get; set; }
         public decimal TicketPrice { get; set; }
+        public ApplicationUser Owner { get; set; }
+        public string OwnerId { get; set; }
     }
 }

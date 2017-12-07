@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SampleMvc.Db;
@@ -9,6 +11,7 @@ using SampleMvc.Db.Models;
 
 namespace SampleMvc.Controllers
 {
+    [Authorize]
     public class MoviesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,7 +24,12 @@ namespace SampleMvc.Controllers
         // GET: Movies
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Movies.ToListAsync());
+            string userId = GetUserId();
+            return View(await _context
+                .Movies
+                .Include(m=>m.Owner)
+                .Where(m=>m.Owner.Id==userId)
+                .ToListAsync());
         }
 
         // GET: Movies/Details/5
@@ -57,11 +65,17 @@ namespace SampleMvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                movie.OwnerId = GetUserId();
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(movie);
+        }
+
+        private string GetUserId()
+        {
+            return HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
 
         // GET: Movies/Edit/5
