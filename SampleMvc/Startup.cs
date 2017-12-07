@@ -29,6 +29,14 @@ namespace SampleMvc
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services
+                .AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    options.ClientId = Configuration["Oauth:Google:ClientId"];
+                    options.ClientSecret = Configuration["Oauth:Google:ClientSecret"];
+                });
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
 
