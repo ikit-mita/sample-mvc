@@ -7,6 +7,7 @@ namespace SampleMvc.Models.ManageViewModels
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
+        public bool IsPhoneNumberConfirmed { get; set; }
 
         [Required]
         [EmailAddress]

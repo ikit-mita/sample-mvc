@@ -44,7 +44,10 @@ namespace SampleMvc
                 });
 
             // Add application services.
-            services.AddTransient<IEmailSender, EmailSender>();
+            services
+                .AddTransient<IEmailSender, EmailSender>()
+                .AddTransient<ISmsSender, SmscRuSender>()
+                ;
 
             services.AddMvc();
         }
