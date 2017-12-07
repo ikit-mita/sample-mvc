@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SampleMvc.Services;
 using SampleMvc.Db;
 using SampleMvc.Db.Models;
+using SampleMvc.Extensions;
 
 namespace SampleMvc
 {
@@ -35,6 +36,11 @@ namespace SampleMvc
                 {
                     options.ClientId = Configuration["Oauth:Google:ClientId"];
                     options.ClientSecret = Configuration["Oauth:Google:ClientSecret"];
+                })
+                .AddGithub(options =>
+                {
+                    options.ClientId = Configuration["Oauth:Github:ClientId"];
+                    options.ClientSecret = Configuration["Oauth:Github:ClientSecret"];
                 });
 
             // Add application services.
